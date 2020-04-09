@@ -9,12 +9,11 @@ namespace ConnectToBPM
 {
     class Login
     {
-        private const string _uri = "https://035710-sales-enterprise.terrasoft.ru";
-        private const string _authServiceUri = _uri + @"/ServiceModel/AuthService.svc/Login";
-        public static bool TryLogin(string userName, string userPassword, CookieContainer AuthCookie)
+        
+        public static bool TryLogin(string userName, string userPassword, CookieContainer AuthCookie,string authServiceUri, CookieCollection cookieCollection)
         {
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(_authServiceUri);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(authServiceUri);
             request.Method = "POST";
             request.ContentType = "application/json";
             request.CookieContainer = AuthCookie;
@@ -38,9 +37,12 @@ namespace ConnectToBPM
                     status = JsonConvert.DeserializeObject<RespStatus>(respText);
                 }
             }
+
             if (status.Code == 0)
             {
                 Console.WriteLine("Successful!");
+                Program.cookieCollection = request.CookieContainer.GetCookies(new Uri(authServiceUri));
+                Program.csrfToken = Program.cookieCollection["BPMCSRF"].Value;
                 return true;
             }
             else
