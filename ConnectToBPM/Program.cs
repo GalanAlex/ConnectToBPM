@@ -25,8 +25,15 @@ namespace ConnectToBPM
             var cs = Console.ReadLine();
             if (cs.Equals("Add"))
             {
-                Add.AddContact(AuthCookie, csrfToken);
+                Insert.AddContact(AuthCookie, csrfToken);
 
+            }
+            else if (cs.Equals("Select"))
+            {
+                Select.SelectView(AuthCookie, csrfToken);
+            }else if (cs.Equals("Update"))
+            {
+                Update.UpdateElement(AuthCookie, csrfToken);
             }
 
         }

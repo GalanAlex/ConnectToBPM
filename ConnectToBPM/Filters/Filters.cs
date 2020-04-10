@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConnectToBPM.InsertQueryFolder
+namespace ConnectToBPM.Filters
 {
-    class ColumnValues
+    class Filters
     {
         public object Items { get; set; }
     }
