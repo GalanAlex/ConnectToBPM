@@ -33,7 +33,7 @@ namespace ConnectToBPM
             RightExpression re = new RightExpression();
             Filters.Parameter pr1 = new Filters.Parameter();
             upd.RootSchemaName = "Contact";
-            upd.OperationType = 1;
+            upd.OperationType = 2;
             upd.IsForceUpdate = true;
             upd.ColumnValues = col;
             upd.Filters = fil;
@@ -44,12 +44,12 @@ namespace ConnectToBPM
             fnm.FilterType = 1;
             fnm.ComparisonType = 3;
             fnm.LeftExpression = le;
-            le.ColumnPath = "Name";
+            le.ColumnPath = "Id";
             le.ExpressionType = 0;
             re.ExpressionType = 2;
             re.Parameter = pr1;
-            pr1.DataValueType = 1;
-            pr1.Value = "Alexey Galanin";
+            pr1.DataValueType = 0;
+            pr1.Value = "15eb3b8f-4d2d-4bc9-b42e-0b4ce36544e1";
             fnm.RightExpression = re;
             col.Items = it;
             //it.Account = ai;
