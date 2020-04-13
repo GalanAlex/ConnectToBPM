@@ -8,9 +8,10 @@ namespace ConnectToBPM.Filters
     {
         //public string RootSchemaName { get; set; }
         public int FilterType { get; set; }
+        public bool IsEnabled { get; set; }
         public object ComparisonType { get; set; }
         public object LeftExpression { get; set; }
         public object RightExpression { get; set; }
-        public bool IsEnabled { get; set; }
+        
     }
 }

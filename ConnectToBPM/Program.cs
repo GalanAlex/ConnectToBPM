@@ -35,6 +35,10 @@ namespace ConnectToBPM
             {
                 Update.UpdateElement(AuthCookie, csrfToken);
             }
+            else if (cs.Equals("Delete"))
+            {
+                Delete.DeleteEntry(AuthCookie, csrfToken);
+            }
 
         }
     }
