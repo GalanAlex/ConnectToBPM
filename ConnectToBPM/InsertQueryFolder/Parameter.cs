@@ -7,6 +7,6 @@ namespace ConnectToBPM.InsertQueryFolder
     class Parameter
     {
         public int DataValueType { get; set; }
-        public string Value { get; set; }
+        public object Value { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace ConnectToBPM.InsertQueryFolder
         public string RootSchemaName { get; set; }
         public int OperationType { get; set; }
         public object ColumnValues {get; set;}
+        public object Filters { get; set; }
+
 
     }
 }

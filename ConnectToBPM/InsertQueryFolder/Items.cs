@@ -7,7 +7,9 @@ namespace ConnectToBPM.InsertQueryFolder
 {
     class Items
     {
-        public object Name { get; set; }
-        public object Account { get; set; }
+        //public object Name { get; set; }
+        //public object Account { get; set; }
+        public object Data { get; set; }
+
     }
 }

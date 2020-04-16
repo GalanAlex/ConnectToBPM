@@ -11,7 +11,7 @@ namespace ConnectToBPM
     class Insert
     {
         public static bool AddContact(CookieContainer AuthCookie,string csrfToken)
-        {
+        {/*
             var addUri = "https://035710-sales-enterprise.terrasoft.ru/0/dataservice/json/reply/InsertQuery";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(addUri);
             request.Headers.Add("BPMCSRF", csrfToken);
@@ -65,7 +65,7 @@ namespace ConnectToBPM
             {
                 Console.WriteLine(e);
             }
-            
+            */
             return true;
         }
     }
