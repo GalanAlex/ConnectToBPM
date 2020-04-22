@@ -14,13 +14,13 @@ namespace ConnectToBPM
     {
         public static void GetFileInfo(CookieContainer AuthCookie, string csrfToken)
         {
-            var addUri = "https://035710-sales-enterprise.terrasoft.ru/0/dataservice/json/reply/InsertQuery";
+            var addUri = "http://localhost:90/0/rest/SmrAddFile/AddFile";
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(addUri);
             request.Headers.Add("BPMCSRF", csrfToken);
             request.Method = "POST";
             request.ContentType = "application/json";
             request.CookieContainer = AuthCookie;
-            var path = @"C:\Users\Alex\Pictures\Screenshots\Screenshot.png";
+            var path = @"C:\Users\alexey.galanin\123.txt";
             FileInfo fileInfo = new FileInfo(path);
             if (fileInfo.Exists)
             {
@@ -29,10 +29,61 @@ namespace ConnectToBPM
                 Console.WriteLine("Размер: {0}", fileInfo.Length);
                 Console.WriteLine(fileInfo.Extension);
             }
+            var nm = fileInfo.Name;
             FileStream fstream = File.OpenRead(path);
+            string bs64 = "";
             byte[] ab = new byte[fstream.Length];
             fstream.Read(ab, 0, ab.Length);
+            bs64 = Convert.ToBase64String(ab);
+            FileJson fj = new FileJson
+            {
+                Array = bs64,
+                Id = "c4ed336c-3e9b-40fe-8b82-5632476472b4",
+                Name = nm
+            };
+            var json = JsonConvert.SerializeObject(fj);
+            using (var requestStream = request.GetRequestStream())
+            {
+                using (var writer = new StreamWriter(requestStream))
+                {
+                    writer.Write(json);
+                }
+            }
+            //RespStatus status = null;
+            Console.WriteLine(json);
+            try
+            {
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (var reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        string respText = reader.ReadToEnd();
+                        //status = JsonConvert.DeserializeObject<RespStatus>(respText);
+                        Console.WriteLine(respText);
 
+                        //Console.WriteLine("Successful!");
+                    }
+                }
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            //Console.WriteLine(json);
+
+        }
+    }
+
+    public class FileJson
+    {
+        public object Name { get; set; }
+        public object Array { get; set; }
+        public object Id { get; set; }
+    }
+}
+
+/*
             //Filters.Filters fil = new Filters.Filters();
             //Filters.Items fit = new Filters.Items();
             //LeftExpression le = new LeftExpression();
@@ -71,36 +122,4 @@ namespace ConnectToBPM
             //pr1.DataValueType = 0;
             //pr1.Value = "d73f2e3a-f46b-1410-5290-001d60c7ee8c";
             //fnm.RightExpression = re;
-            var json = JsonConvert.SerializeObject(ins);
-            using (var requestStream = request.GetRequestStream())
-            {
-                using (var writer = new StreamWriter(requestStream))
-                {
-                    writer.Write(json);
-                }
-            }
-            RespStatus status = null;
-            Console.WriteLine(json);
-            try
-            {
-                using (var response = (HttpWebResponse)request.GetResponse())
-                {
-                    using (var reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        string respText = reader.ReadToEnd();
-                        status = JsonConvert.DeserializeObject<RespStatus>(respText);
-                        //Console.WriteLine(respText);
-
-                        Console.WriteLine("Successful!");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            //Console.WriteLine(json);
-
-        }
-    }
-}
+            */

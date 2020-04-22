@@ -10,7 +10,7 @@ namespace ConnectToBPM
 {
     class Program
     {
-        private const string _uri = "https://035710-sales-enterprise.terrasoft.ru";
+        private const string _uri = "http://localhost:90/";
         private const string _authServiceUri = _uri + @"/ServiceModel/AuthService.svc/Login";
         public static bool check = false;
         public static CookieContainer AuthCookie = new CookieContainer();
@@ -18,7 +18,7 @@ namespace ConnectToBPM
         public static string csrfToken = null;//cookieCollection["BPMCSRF"].Value;
         static void Main(string[] args)
         {
-            Console.WriteLine("Successful authentication?: {0}", Login.TryLogin("Alexey", "123", AuthCookie, _authServiceUri, cookieCollection));
+            Console.WriteLine("Successful authentication?: {0}", Login.TryLogin("Supervisor", "Supervisor", AuthCookie, _authServiceUri, cookieCollection));
             
             Console.WriteLine("Which case do you want to use?");
 
